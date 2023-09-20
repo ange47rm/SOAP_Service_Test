@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://localhost:3000/store-survey-information"
+    targetNamespace="http://localhost:3000/store-survey-information">
+
+    <!-- Types: Define data types used in the service -->
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://localhost:3000/store-survey-information">
+            <xsd:element name="YesNoRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- Define elements for email and yes/no -->
+                        <xsd:element name="email" type="xsd:string"/>
+                        <xsd:element name="yesOrNo" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="YesNoResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- Define elements for the response if needed -->
+                        <xsd:element name="result" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+
+    <!-- Message: Define message types -->
+    <wsdl:message name="storeYesOrNoRequest">
+        <wsdl:part name="parameters" element="tns:YesNoRequest"/>
+    </wsdl:message>
+    <wsdl:message name="storeYesOrNoResponse">
+        <wsdl:part name="parameters" element="tns:YesNoResponse"/>
+    </wsdl:message>
+
+    <!-- Port Type: Define the operations that the service provides -->
+    <wsdl:portType name="SurveyServicePortType">
+        <wsdl:operation name="storeYesOrNo">
+            <wsdl:input message="tns:storeYesOrNoRequest"/>
+            <wsdl:output message="tns:storeYesOrNoResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- Binding: Specify the protocol and encoding style -->
+    <wsdl:binding name="SurveyServiceSoapBinding" type="tns:SurveyServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="storeYesOrNo">
+            <soap:operation soapAction="http://localhost:3000/store-survey-information/SurveyService/storeYesOrNo"/>
+            <wsdl:input name='storeYesOrNoRequest'>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name='storeYesOrNoResponse'>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- Service: Define the service itself -->
+    <wsdl:service name="StoreSurveyInformation">
+        <wsdl:port name="SurveyServiceSoapPort" binding="tns:SurveyServiceSoapBinding">
+            <soap:address location="http://localhost:3000/store-survey-information"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
+
+
