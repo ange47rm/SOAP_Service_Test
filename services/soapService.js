@@ -11,7 +11,7 @@ const soapService = {
 
     // Prepare and return the SOAP response
     const response = `
-      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://localhost:3000/store-survey-information">
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://localhost:3001/store-survey-information">
         <soap:Body>
           <result>Stored successfully</result>
         </soap:Body>

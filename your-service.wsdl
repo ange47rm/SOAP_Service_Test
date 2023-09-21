@@ -1,53 +1,50 @@
-<definitions name = "HelloService"
-   targetNamespace = "http://localhost:3001/store-survey-information"
-   xmlns = "http://schemas.xmlsoap.org/wsdl/"
-   xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
-   xmlns:tns = "http://localhost:3001/store-survey-information"
-   xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+<definitions name="SurveyService"
+   targetNamespace="http://localhost:3001/store-survey-information"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:tns="http://localhost:3001/store-survey-information"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
  
-
- 
-   <message name = "storeYesOrNoRequest">
-      <part name = "emailAddress" type = "xsd:string"/>
-      <part name = "yesOrNo" type = "xsd:string"/>
+   <message name="storeYesOrNoRequest">
+      <part name="email" type="xsd:string"/>
+      <part name="yesOrNo" type="xsd:string"/>
    </message>
-	
-   <message name = "storeYesOrNoResponse">
-      <part name = "response" type = "xsd:string"/>
+   
+   <message name="storeYesOrNoResponse">
+      <part name="result" type="xsd:string"/>
    </message>
 
-   <portType name = "SurveyServicePortType">
-      <operation name = "storeYesOrNo">
-         <input message = "tns:storeYesOrNoRequest"/>
-         <output message = "tns:storeYesOrNoResponse"/>
+   <portType name="SurveyServicePortType">
+      <operation name="storeYesOrNo">
+         <input message="tns:storeYesOrNoRequest"/>
+         <output message="tns:storeYesOrNoResponse"/>
       </operation>
    </portType>
 
-   <binding name = "SurveyServiceSoapBinding" type = "tns:SurveyServicePortType">
-      <soap:binding style = "rpc"
-         transport = "http://schemas.xmlsoap.org/soap/http"/>
-      <operation name = "storeYesOrNo">
-         <soap:operation soapAction = "storeYesOrNo"/>
+   <binding name="SurveyServiceSoapBinding" type="tns:SurveyServicePortType">
+      <soap:binding style="rpc"
+         transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="storeYesOrNo">
+         <soap:operation soapAction="http://localhost:3001/store-survey-information/storeYesOrNo"/>
          <input>
             <soap:body
-               encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
-               namespace = "urn:examples:helloservice"
-               use = "encoded"/>
+               encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+               namespace="http://localhost:3001/store-survey-information"
+               use="encoded"/>
          </input>
-		
+         
          <output>
             <soap:body
-               encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
-               namespace = "urn:examples:helloservice"
-               use = "encoded"/>
+               encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+               namespace="http://localhost:3001/store-survey-information"
+               use="encoded"/>
          </output>
       </operation>
    </binding>
 
-   <service name = "SurveyService">
-      <port binding = "tns:SurveyService" name = "SurveyPort">
-         <soap:address
-            location = "http://localhost:3001/store-survey-information" />
+   <service name="SurveyService">
+      <port binding="tns:SurveyServiceSoapBinding" name="SurveyPort">
+         <soap:address location="http://localhost:3001/store-survey-information" />
       </port>
    </service>
 </definitions>
